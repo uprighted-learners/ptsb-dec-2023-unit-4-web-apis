@@ -1,0 +1,30 @@
+body {
+    background-color: #ddd;
+    display: flex;
+}
+
+.right {
+    justify-content: flex-end;
+}
+
+h1 {
+    color: #ee2191
+}
+
+.listItem {
+    color: #3b1111;
+}
+
+#box {
+    border: 3px solid black;
+    width: 5em;
+    height: 5em;
+}
+
+.red {
+    background-color: red;
+}
+
+.opacity {
+    opacity: 50%;
+}

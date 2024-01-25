@@ -1,0 +1,11 @@
+body {
+    background-color: #ddd;
+}
+
+.red {
+    color: red;
+}
+
+.hidden {
+    display: none;
+}
