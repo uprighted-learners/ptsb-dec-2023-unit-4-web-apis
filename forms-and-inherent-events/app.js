@@ -1,55 +1,68 @@
-/* 
-    ? Forms
-    * default behavior is to send a GET request to the action attr value
-    * can be overriden using event.preventDefault()
-    * name attr within html elements give data its properties
-    
-    ? URL's
+/*
+    ? URLs
     * Uniform Resource Locator
-    * carries protocol, top domain, sub domain, route, and any queries
-    * Query params are the data that comes from our form
-    * Begin with ? symbol
-    * Followed by key=value pair
-    * Separated with & symbol
-    * Example of our GET request
-    * 127.0.0.1:4000/index.html?email=paul%40uprighted.com&pwd=dbLocal
-*/
+    * carries tons of information!
+        * protocol, domain and subdomain, route, query params
+    * http://mail.google.com/u/1/home
+        * http is the protocol (https is another, also file and ftp)
+        * mail is the subdomain
+        * google is the domain
+        * .com is the TLD - top level domain
+        * /u/1/home is the path within the domain
+    * any url can be modified with query params
+        * also called "query string" or "url parameters"
+        * how they are handled is up to the site
+        * made up of key value pairs
+        * starts with ?
+        * key=value
+        * separated by &
+        * in forms
+            * the key comes from the "name" attribute
+            * the value comes from the "value" attribute
+    */
 
-let url = document.location.search
-console.log("URL String", url)
-// Creates a Location object that sanitizes query parameters
-let params = new URLSearchParams(url)
-console.log(params)
-// Utilize .get() method of the Location interface to access query values
-let email = params.get("email")
-let pwd = params.get("pwd")
-console.log(email, pwd)
+// this gives us a string, which we would have to parse to get the values
+const queryString = document.location.search
+console.log(queryString);
 
-// const btn = document.getElementById("submit")
-// const output = document.getElementById("output")
+// or we can get the params as an object (from the query string)
+const queryParams = new URLSearchParams(document.location.search)
+console.log(queryParams);
 
-// const db = [
-//     { email: "brandon@gmail.com", password: "password123" },
-//     { email: "julia@gmail.com", password: "ilikespain123" },
-//     { email: "paul@uprighted.com", password: "dbLocal" }
-// ]
+// use the .get() method to access query values
+const email = queryParams.get('email')
+const pwd = queryParams.get('pwd')
 
-// btn.addEventListener("click", evt => {
-//     evt.preventDefault()
-//     let email = evt.target.form[0].value
-//     let pwd = evt.target.form[1].value
-    
-//     const foundUser = db.filter(entry => entry.email === email)
-    
-//     if (foundUser.length === 0) {
-//         output.textContent = "No user found"
-//     } else {
-//         if (foundUser[0].password === pwd) {
-//             output.textContent = "Logged in"
-//         } else {
-//             output.textContent = "Incorrect password"
-//         }
-//     }
 
-// })
+const db = [
+    { email: 'dburrow@uprighted.com', password: 'abc123' },
+    { email: 'santa@northpole.com', password: 'stnick' },
+    { email: 'bunnny@easter.com', password: 'iloveeggs' }
+]
 
+const btn = document.getElementById('submit')
+const output = document.getElementById('output')
+
+btn.addEventListener('click', event => {
+    event.preventDefault()
+    // event.target.form is an array-like object
+    // with all of the inputs from the form inside it
+    const email = event.target.form[0].value
+    const pwd = event.target.form[1].value
+
+    // find uses from our db who have the given email address
+    const user = db.filter(entry => entry.email === email)
+
+    // array.filter() returns an array, so we can check its length to see if it's empty
+    if (user.length === 0) {
+        output.textContent = 'user not found'
+    } else if (user.length === 1) {
+        if (user[0].password === pwd) {
+            output.textContent = 'user authenticated'
+        } else {
+            output.textContent = 'incorrect password'
+        }
+    } else {
+        output.textContent = 'what is even going on here'
+    }
+})

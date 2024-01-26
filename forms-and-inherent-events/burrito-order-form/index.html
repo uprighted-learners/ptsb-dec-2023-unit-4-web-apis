@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="#">
+        <title>Burrito Order Form</title>
+        <link rel="stylesheet" href="../styles.css">
+        <script src="app.js" defer></script>
+    </head>
+
+    <body>
+        <a href="http://www.google.com" id="weird-link">Link</a>
+
+        <!-- the form tag's action attribute determines where the form data gets submitted to -->
+        <form action="https://webhook.site/625e72c8-4f8c-41b8-9868-7485adfb4783/f822f5ac-fd4f-414a-a373-bc76489363e6/1"
+            id="form-container">
+            <h4>Beans</h4>
+            <div>
+                <label for="pinto">Pinto Beans</label>
+                <input type="radio" id="pinto" name="beans" value="pinto">
+            </div>
+            <div>
+                <label for="black">Black Beans</label>
+                <input type="radio" id="black" name="beans" value="black">
+            </div>
+
+            <h4>Filling</h4>
+            <div>
+                <label for="carnitas">Carnitas</label>
+                <input type="radio" id="carnitas" name="filling" value="carnitas">
+            </div>
+            <div>
+                <label for="carne">Carne Asada</label>
+                <input type="radio" id="carne" name="filling" value="carne">
+            </div>
+            <div>
+                <label for="nopales">Nopales</label>
+                <input type="radio" id="nopales" name="filling" value="nopales">
+            </div>
+            <div>
+                <label for="jackfruit">Jackfruit</label>
+                <input type="radio" id="jackfruit" name="filling" value="jackfruit">
+            </div>
+
+            <h4>Extras</h4>
+            <div>
+                <label for="cheese">Cheese</label>
+                <input type="checkbox" id="cheese" name="cheese" value="cheese">
+            </div>
+            <div>
+                <label for="crema">Crema</label>
+                <input type="checkbox" id="crema" name="crema" value="crema">
+            </div>
+            <div>
+                <label for="gf">Gluten-Free Crust</label>
+                <input type="checkbox" id="gf" name="gf" value="gf">
+            </div>
+
+            <h4>Delivery instructions</h4>
+            <div>
+                <input type="textarea" id="delivery" name="delivery">
+            </div>
+
+            <input type="submit" id="submit" value="Submit Order">
+        </form>
+
+    </body>
+
+</html>
