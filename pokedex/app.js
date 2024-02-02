@@ -1,49 +1,33 @@
-/* 
-Ideas
-
-Styling
-* sprite card background
-* button text, maybe pokemon icons?
-
-Functionality
-* filter all pokemon by type, etc
-    * generation
-    * evolutions
-    * stats
-    * alphabet
-* modal 
-* √ error handling
-
-*/
-
+// Select all the elements we'll need to access
 const typeSelect = document.getElementById('type-select')
 const results = document.getElementById('results')
 const modal = document.getElementById('modal')
 const modalContent = document.getElementById('modal-content')
 
+// this event listener removes the modal
 modal.addEventListener('click', () => modal.style.display = 'none')
 
+// populate the list every time we select a type from the dropdown
 typeSelect.addEventListener('change', e => {
-    console.log(e.target.value);
     results.innerHTML = ''
     getPokemonByType(e.target.value)
 })
 
+// make a new API call to get all pokemon of the given type
 const getPokemonByType = async (type) => {
-    console.log(type);
-
     const res = await fetch(`https://pokeapi.co/api/v2/type/${type}`)
-    console.log(res);
     const pokemon = await res.json()
     pokemon.pokemon.forEach(p => {
         showPokemon(p.pokemon);
     })
 }
 
+// create card for individual pokemon and add them to the page
 async function showPokemon(monster) {
     const res = await fetch(monster.url)
     const data = await res.json()
 
+    // create card
     const card = document.createElement('div')
     card.setAttribute('id', 'card')
 
@@ -62,11 +46,13 @@ async function showPokemon(monster) {
     }
     card.appendChild(pic)
 
+    // add click listener that opens the modal
     card.addEventListener('click', e => {
         modal.style.display = 'block'
         modalContent.innerHTML = ''
         modalContent.appendChild(h3.cloneNode(true))
         modalContent.appendChild(pic.cloneNode())
+        // add stats to the modal
         data.stats.forEach(stat => {
             const label = document.createElement('h4')
             label.innerText = stat.stat.name
@@ -78,18 +64,20 @@ async function showPokemon(monster) {
         })
     })
 
+    // append card to the page
     results.appendChild(card)
 }
 
+// fetch the list of types from the pokemon API
 const getStyles = async () => {
     const res = await fetch('https://pokeapi.co/api/v2/type')
     const types = await res.json()
     return types.results
 }
 
+// create the dropdown menu with types
 const buildSelect = async () => {
     const types = await getStyles()
-    console.log(typeSelect);
 
     const blankOpt = document.createElement('option')
     blankOpt.setAttribute('value', '')
@@ -105,7 +93,5 @@ const buildSelect = async () => {
         typeSelect.appendChild(opt)
     });
 }
-
-
 
 buildSelect()
